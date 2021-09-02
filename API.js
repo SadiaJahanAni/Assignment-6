@@ -8,7 +8,7 @@ const searchBook = () => {
 
   //load data
   const url = `https://openlibrary.org/search.json?q=${searchText}`;
-  console.log(url);
+  //console.log(url);
   fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data.docs))
@@ -28,14 +28,14 @@ const searchBook = () => {
 }
 
 const displaySearchResult = docs => {
-  console.log(docs)
+  //console.log(docs)
   const searchResult = document.getElementById('search-result')
   searchResult.textContent = '';
   if (docs.length === 0) {
-    document.write('Result not found')
+    alert('Result not found')
   }
   docs.forEach(docs => {
-    console.log(docs);
+    //console.log(docs);
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML = `
@@ -56,60 +56,21 @@ const displaySearchResult = docs => {
   })
 }
 
-//https://covers.openlibrary.org/b/id/554106-M.jpg
-//https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* //load data
- const url = `http://openlibrary.org/search.json?q=${searchText}`;
- // console.log(url);
- fetch(url)
-     .then(res => res.json())
-     .then(data => displaySearchResult(data.CompositionNotebook));
+const allBookNumbers = number => {
+  const url = `https://openlibrary.org/search.json?q=${searchText}`
+  fetch(url)
+    .then(res => res.json())
+    .then(data => displayBookNumbers(data));
 }
 
-const displaySearchResult = CompositionNotebook => {
- console.log(CompositionNotebook);
- const searchResult = document.getElementById('search-result');
- searchResult.textContent = '';
-
- CompositionNotebooks.forEach(book => {
-     console.log(book);
-     const div = document.createElement('div');
-     div.classList.add('col');
-     div.innerHTML = `
-     <div onclick="loadMealDetail(${meal.idMeal})" class="card h-100">
-     <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
-     <div class="card-body">
-         <h5 class="card-title">${meal.strMeal}</h5>
-         <p class="card-text">${meal.strInstructions.slice(0, 200)}</p>
-  </div>
-</div>
+const displayBookNumbers = docs => {
+  //console.log(docs);
+  const bookDiv = document.getElementById('search-result');
+  bookDiv.innerHTML = `
+  <h4>${docs.numFound}</h4>
   `;
-     searchResult.appendChild(div);
- });
+  searchResult.appendChild(div);
 
-}*/
+}
+
+
